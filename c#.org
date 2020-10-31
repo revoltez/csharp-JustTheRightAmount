@@ -1,0 +1,926 @@
+* Basics
+  KEEP YOUR EXPECTATIONS LOW AND YOU WILL NEVER GET DISSAPOINTED 
+** literals 
+  a literal just means a number that you type into your code for example
+  int i =5 ; 5 is a literal 
+  
+** differeence between parameter and argument
+   an parameter is what you define in your method ,an argument is what you pass to it
+   a method with an int parameter can take a byte argument
+   
+** objects are stored in the heap 
+** about console.writeline():
+   console.writeline can outputs strings in different formats
+   if you pass console.writeline() a reference to an object , it will call that object's Tostring method automatically
+** c# is Strongly typed language
+   c#is strongly typed Language meaning u cant just declare the variables without specifying the type
+   
+** precision in Numbers 
+   when using floating point numbers doubles and floats may lose precision unlike the Decimal
+** charachters and strings 
+   to declare a chrachter use single quote and double quotes for a string
+
+** General info about arrayLists and stacks
+   in arraylist you can mix values and put anything inside as long as it derives from system.object which is everything
+   whenever you push anything into the stack make sure its an object , for ex if  u want to pass an integer declare an int then 
+   your stack.push(s);
+
+** escaping special charachters 
+   @ before a string means that the string will escape the special charachters and handle all of it as a string ex
+   string s= "c:\\salih"
+   string b=@"c:\salih" are equivalent
+** String.IsnullorEmpty() returns true if the string is null or Empty 
+** string is a reference type that behaves like a value type
+   In .Net Framework Strings are immutable reference types. All 
+   .net datatypes has default size except string and user type. So String is a Reference type, 
+   because it does not have default allocation size.
+
+   For an example, an integer (System.Int32 ) has a fixed memory size(4 bytes) of Value range -2,147,483,648 through 2,147,483,647. Hence, 
+   an integer can be stored on the Stack (i.e. fixed memory). Alternatively, a String does not have a 
+   pre-defined memory size and it can be huge(the value range may be 0 to approximately 2 billion Unicode characters), 
+   so it requires dynamic memory allocation.
+
+   “string” is just an alias name/keyword for the “System.String” in C#, so there is no actual difference.
+   
+** Why reference versus value types
+   Reference types have some overhead on construction and destruction and garbage collection
+   because they are created on the heap. Value types on the other hand have overhead on method calls (if the data size is larger than a pointer), 
+   because the whole object is copied rather than just a pointer
+   Because strings can be much larger than the size of a pointer, they are designed as reference types.
+** variables and fields 
+   A field is a variable of any type that is declared directly in a class or struct. 
+   Fields are members of their containing type. A class or struct may have instance fields or static fields or both. ... 
+   A private field that stores the data exposed by a public property is called a backing store or backing field.
+** by ref or by value
+All values are passed by value unless specifically stated as a ref or out parameter. But you need to remember that a reference variable, i.e. a non-value-type variable such as an object, is already a reference. So even if you pass that reference variable into a method that takes a normal ‘by value’ argument (not a ‘by ref’ or ‘out’ argument), its actually a reference that you are passing in.
+** struct
+a struct is used to groupe many value type variables into one variable, struct vs class : struct is value type and classes are ref types , strucs dont support inheritance, structs dnt have default constructors.
+* oop
+  The four principles of oop are 
+*** abstarction,encapsulation,polymorphism,inheritance 
+** polymorphism 
+*** Compile time polymorphism
+    its method overloading  
+*** run time polymorphism
+    its method overriding 
+*** Referencing Subclass objects with Subclass vs Superclass reference
+    If there are methods present in super class, but overridden by subclass, and if object of subclass is created,
+    then whatever reference we use(either subclass or superclass),
+    it will always be the overridden method in subclass that will be executed.
+**** when we reference an object using superclass reference we are limiting the methods that the object can call 
+***** advantages :
+      We can use superclass reference to hold any subclass object derived from it.
+***** disadvntages :
+      only the methods that are defined in the superclass are available , and if we override these methods in the subclass ,then the overriden method gets called ; 
+
+**** when we reference an object using subclass reference :
+*****  advantages :
+       By using subclass reference, we will have access to both parts(methods and variables)
+       of the object defined by the superclass or subclass
+***** disadavntages: 
+      We can use subclass reference to hold only for that particular subclass objects only.
+
+** [[https://www.quora.com/Why-is-encapsulation-important][why encapsulation i important]]
+** a subclass can ovveride methods of the superclass Add the virtual keyword to the method in the base class
+   Add the virtual keyword to the method in the base class
+   A subclass can only override a method if it’s marked with the virtual keyword, which
+   tells C# to allow the subclass to override methods.
+   
+** method hiding versus method ovveriding 
+
+| Method overriding                                           | method hiding                                                             |
+|-------------------------------------------------------------+---------------------------------------------------------------------------|
+| in method overriding  you need to                           | simply create a method in a baseclass                                     |
+| define the method of the base class as Virtual              | and in child class you need to define that method                         |
+| and the method of the subclass as overriden                 | using the new keyword                                                     |
+| using the ovveride keyword                                  |                                                                           |
+|-------------------------------------------------------------+---------------------------------------------------------------------------|
+| it only redefines the implementation of the method          | you can completely redefine the method                                    |
+|-------------------------------------------------------------+---------------------------------------------------------------------------|
+| here overriding is object type                              | here hiding is reference type                                             |
+|-------------------------------------------------------------+---------------------------------------------------------------------------|
+| if you do not use the override keyword the compiler         | if you do not use the new keyword the new  keyword                        |
+| will hide the method                                        | the compiler will also hide the method in the base class                  |
+|-------------------------------------------------------------+---------------------------------------------------------------------------|
+| in method overriding when base class references             | when base class references a varible pointing to the object               |
+| variable pointing to the object of the derived class        | of the derived class the it will call the hidden method in the base class |
+| then it will call the overriden method in the derived class |                                                                           |
+|                                                             |                                                                           |
+
+** a subclass can access its base class methods using the Base keyword ex: base.eat(); 
+** interfaces
+*** you can't instantiate an interface but you can reference an Interface 
+    you can use an interface reference to an object that implements that interface you need and you will always be sure 
+    that it has the right methods for your purpose even if you dont know much else about that object 
+    you can find out if a class implements an interface with the "is" operator 
+*** what you can do with interfaces
+    when your class implements
+    an interface, then an interface reference can
+    point to any instance of that class. And that’s
+    really useful to you—it lets you create one
+    reference type that can work with a whole
+    bunch of different kinds of objects.
+   
+    Here’s a quick example. A horse, an ox, a
+    mule, and a steer can all pull a cart. But in
+    our zoo simulator, Horse , Ox , Mule ,
+    and Steer would all be different classes.
+    Let’s say you had a cart-pulling ride in your
+    zoo, and you wanted to create an array of
+    any animal that could pull carts around. Uh-
+    oh—you can’t just create an array that will
+    hold all of those. If they all inherited from the
+    same base class, then you could create an
+    array of those. But it turns out that they don’t.
+    So what’ll you do?
+    
+That’s where interfaces come in handy. You
+    can create an IPuller interface that has
+    methods for pulling carts around. Now you
+    could declare your array like this:
+    IPuller[] pullerArray;    
+
+    Now you can put a reference to any
+    animal you want in that array, as long as it
+    implements the IPuller interface.
+
+** upcasting
+   when you substitue a subclass for a base class
+   the only drawback of upcasting is that you can only use the methods of the baseclass 
+** downcasting
+   if you already knew that you did an upcast on an object ,you got the limitation of using only the methods that 
+   the baseclass have ,so you can check if your are uncertain about the type of your object using the "is" keyword 
+   once you know its of a type of a subclass ,you can use downcasting using the "as" keyword 
+   ex:make an appliance back to a cofee maker
+   
+   Now that we know it’s a CoffeeMaker, let’s use it like one
+   The is keyword is the first step. Once you know that you’ve got an Appliance reference
+   that’s pointing to a CoffeeMaker object, you can use as to downcast it. And that lets
+   you use the CoffeeMaker class’s methods and properties. And since CoffeeMaker
+   inherits from Appliance, it still has its Appliance methods and properties.
+   applicance powerconsumer= new CoffeeMaker()
+   if (powerConsumer is CoffeeMaker) {
+   
+   CoffeeMaker javaJoe = powerConsumer as CoffeeMaker;
+   javajoe.makecofee();
+
+   }
+
+** abstract classes
+   An abstract class is like a cross
+   between a class and an interface
+   Suppose you need something like an interface, that requires classes to
+   implement certain methods and properties. But you need to include some
+   code in that interface, so that certain methods don’t have to be implemented
+   in each inheriting class. What you want is an abstract class. You get the
+   features of an interface, but you can write code in it like a normal class.
+   
+* Collections
+** lists
+   Lists make it easy to store collections of...anything
+   The .NET Framework has a bunch of collection classes that handle all of those
+   nasty issues that come up when you add and remove array elements. The most
+   common sort of collection is a List<T>. Once you create a List<T> object, it’s
+   easy to add an item, remove an item from any location in the list, peek at an item,
+   and even move an item from one place in the list to another.
+   
+   List<T> cards = new List<T>(); // the <T> means its generic
+
+   Once you’ve got a List<T> object, you can add as many items to it as you want (as long as they’re
+   polymorphic with whatever type you specified when you created your new List<T>).
+** list.sort()
+   knows how to sort any type or class that implements the Icomparable<T> interface
+   the interface has one method called compareto()
+   list.sort() uses an object's compareto() method to compare it with other objects
+   and uses its return value (int) to determine which comes first  
+   
+** what is Tresult in c#
+it just means TYpe result just like T in types
+* covariance and contravariance
+   Both C# and the CLR allow for covariance and contra-variance of reference types when binding
+   a method to a delegate. Covariance means that a method can return a type that is derived from the
+   delegate’s return type. Contra-variance means that a method can take a parameter that is a base of
+   the delegate’s parameter type. For example, given a delegate defined like this:
+
+   delegate Object MyCallback(FileStream s);
+
+   it is possible to construct an instance of this delegate type bound to a method that is prototyped
+   like this. :
+
+   String SomeMethod(Stream s);
+
+   Here, SomeMethod ’s return type ( String ) is a type that is derived from the delegate’s return type
+   ( Object ); this covariance is allowed. SomeMethod ’s parameter type ( Stream ) is a type that is a base
+   class of the delegate’s parameter type ( FileStream ); this contra-variance is allowed.
+   Note that covariance and contra-variance are supported only for reference types, not for value
+   types or for void . So, for example, I cannot bind the following method to the MyCallback delegate.
+
+   Int32 SomeOtherMethod(Stream s);
+* Delegates And Events
+** old
+   delegates are mostly used to "Personally, it feels to me that using delegates split
+   up your code into units and make it tons more manageable. 
+   Great mechanism to use in conjunction with unit testing if most of your methods have the same signature pattern
+
+   delegates cant be declared inside a method because they are type definitions like typedef
+   and type definitions are not allowed to be declared inside methods it does not make sense
+    
+*** multicast delegates
+    there are also multicasst delegates which means that a delegate instance can call more then one method example 
+    Delegate c = square ;
+    c=c+ seconf method;
+
+    
+*** Events
+   An event is nothing but an encapsulated delegate.
+   As we have learned in the previous section, a delegate is a reference type data type
+
+   to see how events work check visual studio project evenst_delegates 
+   you need a publisher class that will hold the event and a subscriber class how to connect betwwen the both is very easy 
+   publisher_class.myevent=+=subscriber_class.method;
+   there is also a pattern of microsoft of events
+
+*** special delegates
+   a prediate is just a delegate thats it except it accepts one single parameter and returns 
+   a boolean , its a special delegate anyone can create a predicate 
+   
+** New 
+   delegates provide a way of giving a level of indirection, so that instead of specify-
+   ing behavior directly, it can be in some way “contained” in an object,
+
+   Alternatively, you can think of a delegate type as a single-method interface,
+   and a delegate instance as an object implementing that interface.
+
+*** steps to work with delegates
+    In order for delegates to do anything, four things need to happen:
+    The delegate type needs to be declared.
+    There must be a method containing the code to execute.
+    A delegate instance must be created.
+    The delegate instance must be invoked.
+
+*** ditinction between delegate type and delegate instance
+    NOTE
+    Source of confusion: the ambiguous term “delegate”—Delegates are often mis-
+    understood because the word “delegate” is used to describe both a “dele-
+    gate type” and a “delegate instance.” The distinction between these two is
+    exactly the same as the one that exists between any other type and
+    instances of that type—the string type itself is different from a particular
+    sequence of characters 
+*** I should stress that back in the world of software, this isn’t a matter of
+    objects leaving dying wishes , Often the object that first creates a delegate
+    instance is still alive and well when the delegate instance is
+    invoked. Instead, it’s about specifying some code to be executed at a
+    particular time, when you may not be able to (or may not want to)
+    change the code that is running at that point. If I want something to
+    happen when a button is clicked, I don’t want to have to change the
+    code of the button—I just want to tell the button to call one of my meth-
+    ods that will take the appropriate action. It’s a matter of adding a level of
+    indirection—as so much of object-oriented programming is. As we’ve seen, this adds
+    complexity (look at how many lines of code it took to produce so little output!) but
+    also flexibility.    
+    
+*** Events
+    they providde encapsulation to the delegates , they are basically getters and setters of a delegate , 
+    you cant do the (=) operation on an event , only the += and -= 
+* Method GRoups
+the methods that have the same name but difers in the signature are called methods groups like console.writeline
+* Type system characteristics
+** dynamic types
+   C# 4.0 (.NET 4.5) introduced a new type that avoids compile time type checking.
+   You have learned about the implicitly typed variable- var in the previous section where the compiler assigns
+   a specific type based on the value of
+   the expression. A dynamic type escapes type checking at compile time;
+   instead, it resolves type at run time.
+   
+   The compiler compiles dynamic types into object types in most cases
+** anonymous types
+   C# - Anonymous Type
+   Anonymous type, as the name suggests, is a type that doesn't have any name.
+   C# allows you to create an object with the new keyword without defining its class.
+   The implicitly typed variable- var is used to hold the reference of anonymous types.
+
+   An anonymous type is a temporary data type that is inferred based on the data that you include in an object initializer.
+   Properties of anonymous types will be read-only properties so you cannot change their values.
+
+*** Example: Anonymous Type
+    var myAnonymousType = new { firstProperty = "First", 
+    secondProperty = 2, 
+    thirdProperty = true 
+    };
+        
+** Type safe
+   Type safety means that the compiler will validate types while compiling, 
+   and throw an error if you try to assign the wrong type to a variable.
+* value types and reference types
+** storage 
+   The values of variables are stored wherever they are declared. Local variable values
+   are always stored on the stack and instance variable values are always stored wherever the instance itself
+   is stored ,
+   
+   reference type instances (objects) are always stored on the heap as of static variables
+** remember
+   remember that The value of a reference type variable is always a reference.
+   and The value of a value type variable is always a value of that type.
+   
+** boxing and unboxing
+converting from value type to refrence type and vice versa
+* Generics
+** casting is awfull 
+   Casts are bad, m’kay? Not bad in an “almost never do this” kind of way (like muta-
+   ble structs and nonprivate fields) but bad in a “necessary evil” kind of way. They’re an
+   indication that you ought to give the compiler more information somehow, and that
+   the way you’re choosing is to get the compiler to trust you at compile time and gener-
+   ate a check to run at execution time, to keep you honest.
+   
+   so the good thing bout generics is more checking of types at compile time
+   
+** generic delegates 
+A generic delegate can be defined the same way as delegate but with generic type.
+*** Example: Generic Delegate
+#+BEGIN_SRC CSHARP
+    class Program
+    {
+    public delegate T add<T>(T param1, T param2);
+
+    static void Main(string[] args)
+    {
+        add<int> sum = AddNumber;
+
+        Console.WriteLine(sum(10, 20));
+
+        add<string> conct = Concate;
+
+        Console.WriteLine(conct("Hello","World!!"));
+    }
+
+    public static int AddNumber(int val1, int val2)
+    {
+        return val1 + val2;
+    }
+
+    public static string Concate(string str1, string str2)
+    {
+        return str1 + str2;
+    }
+}
+    #+END_SRC
+In the above example, add delegate is generic. In the Main() method,
+it has defined add delegate of int type variable sum. So it can point to the AddNumber() method which has int type parameters.
+Another variable of add delegate uses string type, so it can point to the Concate method. In this way,
+you can use generic delegates for different methods of different types of parameters.
+
+** generic constraints 
+   By default, a type parameter can be substituted with any type whatsoever. Con‐
+   straints can be applied to a type parameter to require more specific type arguments.
+   These are the possible constraints:
+
+   where T : base-class //Base-class constraint
+   where T : interface //interface constraint 
+   where T : class // reference-type constarint 
+   where T : new() //parameterless constructor constraint 
+   where T : T2 //naked type connstarint 
+   
+** points to rememer about generics
+1. Increases the reusability of the code.
+2. Generic are type safe. You get compile time errors if you try to use a different type of data than the one specified in the definition.
+3. Generic has a performance advantage because it removes the possibilities of boxing and unboxing.
+** Extra Knowledge 
+   The generic arity of a declaration is the number of type parameters it has. To be hon-
+   est, this is a term that’s more useful to authors than in everyday usage when writing
+   code, but I’d argue it’s still worth knowing. You can think of a nongeneric declaration
+   as one with generic arity 0.
+* Nullable types
+** Problems Nullable types that tries to solve
+   null means a reference that isn't pointing to an instance of an object. Value types are stored as the values themselves, 
+   without any references. Therefore, it doesn't make sense to have a null value type—the value type by definition contains a value
+
+   Sometimes you need to represent the difference between
+   “known to be absent” and “unknown” within your data, but often just the absence of information is enough.
+   so nullable value types keep a seperate flag Keep a separate Boolean flag to indicate whether another field has a real value
+   or the value should be ignored.
+  
+   the simplest way of using the value is also a safe one because it throws an
+   exception if you try to use it inappropriately.
+* Anonymous Methods
+** old
+  anonoumous mehtods are methods that doesnt have a body and are used by delegates
+  so mainly if you dont want to call or name a function just say delegate(parameters){//body}
+  thats it
+
+  the biggest difference between out and ref is that if you use out any data that is sent from the outside
+  is discarded in other words you have to reinistilize that variable
+  ----------------------------------------------------unity
+  monobehavior class is the one that lets you attach your script to a game object
+  the print statment is bad programming practice for debugging it may even crash the unity ide itself
+** New
+   its all about a delegate instance without a name
+   As the name suggests, an anonymous method is a method without a name.
+   Anonymous methods in C# can be defined using the delegate keyword and can be assigned to a variable of delegate type.
+   EXAMPLE :
+#+BEGIN_SRC
+public delegate void Print(int value);
+
+static void Main(string[] args)
+{
+    Print print = delegate(int val) {
+        Console.WriteLine("Inside Anonymous method. Value: {0}", val);
+    };
+
+    print(100);
+}
+#+END_SRC
+Anonymous methods helps you create delegate instances without speifying the method name like we always do
+* Lambda expressions
+  The basic syntax for lambda expressions is always of this form:
+  parameter-list => body
+
+  Lambda Expression is a shorter way of representing anonymous method.
+  Lambda Expression syntax: parameters => body expression
+  Lambda Expression can have zero parameter.
+  Lambda Expression can have multiple parameters in parenthesis ().
+  Lambda Expression can have multiple statements in body expression in curly brackets {}.
+  Lambda Expression can be assigned to Func, Action or Predicate delegate.
+  Lambda Expression can be invoked in a similar way to delegate.
+* LinQ
+** Linq can be used of two ways Linq methods and Linq query syntax
+  Standard Query Operators in LINQ (where,select,tolist,...etc) are actually extension methods for the IEnumerable<T> and IQueryable<T> types. 
+  They are defined in the System.Linq.Enumerable and System.Linq.Queryable classes. There are over 50 standard query operators 
+  available in LINQ that provide different functionalities like filtering, sorting, grouping, aggregation, concatenation, etc.
+
+  example:
+  query syntax: 
+  var students =from s in stdlist where s.age > 20 select s;
+  // s.age is lambda expression but its called a body expression because we already specified the type in the begining 
+  method syntax:
+  var students = stdlist.where( s => s.age > 20).tolist<student>();
+  Unlike the query syntax, you need to pass whole lambda expression as a predicate function instead of just body expression in LINQ method syntax.
+* THreads and Tasks
+   threads are very expensive resources that should be used sparingly. The best way to accomplish
+   this is by using the thread pool. The thread pool will manage thread creation and destruction for
+   you automatically. The thread pool creates a set of threads that get reused for various tasks so your
+   application requires just a few threads to accomplish all of its work.
+   
+
+** Thread priorities
+   a Normal thread in a Normal process is assigned a priority level of 8. Because most
+   processes are of the Normal priority class and most threads are of Normal thread priority, most
+   threads in the system have a priority level of 8.
+   If you have a Normal thread in a high-priority process, the thread will have a priority level of 13. If
+   you change the process’s priority class to Idle, the thread’s priority level becomes 4. Remember that
+   thread priorities are relative to the process’s priority class. If you change a process’s priority class, the
+   thread’s relative priority will not change, but its priority number will.
+
+   The concept of a process priority class confuses some people. They think that this
+   somehow means that Windows schedules processes. However, Windows never schedules
+   processes; Windows only schedules threads. The process priority class is an abstract con-
+   cept that Microsoft created to help you rationalize how your application compares with
+   other running applications; it serves no other purpose.
+   
+** lock
+   you can have a shared varible betwwen threads but in order to lock that variable c# provides you with the Lock keyword
+   example :
+#+BEGIN_SRC    
+ class ThreadSafe
+   {
+   static bool _done;
+   static readonly object _locker = new object();
+   static void Main()
+   {
+       new Thread (Go).Start();
+       Go();
+   }
+   static void Go()
+   {
+      lock (_locker)
+     {
+        if (!_done) { Console.WriteLine ("Done"); _done = true; }
+     }
+    }
+   }
+#+END_SRC 
+   When two threads simultaneously contend a lock (which can be upon any
+   reference-type object, in this case, _locker ), one thread waits, or blocks, until the
+   lock becomes available. In this case, it ensures only one thread can enter its code
+   and the thread will be called thread-safe
+** passing data to a thread 
+   the best way to pass data to a thread is through lambda expressions
+   example 
+   THread t=new thread (()=> mymethod('hello'));
+   t.start()
+** exception handling
+   Any try / catch / finally blocks in effect when a thread is created are of no relevance
+   to the thread when it starts executing.
+   so when a thread throws an exception the try and catch blocks should be inside of thread not outside of thread or exception wont be cought 
+and thats because threads have different excution paths
+   
+** thread pools
+   So for every time for every new request a framework creates a new thread object which get allocated on memory. If there are many request then there 
+   will be many thread objects, if there are many thread objects for every task then there will be load on memory and thus makes an application slow.
+   
+   Thread pool is a collection of threads which can be used to perform no of task in background. Once thread completes its task then it sent to the pool to a queue of
+   waiting threads,where it can be reused. This reusability avoids an application to create more threads and this enables less memory consumption.
+
+   [[http://www.learncsharptutorial.com/threadpooling-csharp-example.php][Further Informations On THread Pools]]   
+
+   ThreadPool.QueueUserWorkItem(new WaitCallback(Process));
+** Tasks
+
+   Calling ThreadPool ’s QueueUserWorkItem method to initiate an asynchronous compute-bound
+   operation is very simple. However, this technique has many limitations. The biggest problem is that
+   there is no built-in way for you to know when the operation has completed, and there is no way to
+   get a return value back when the operation completes. To address these limitations and more, Micro-
+   soft introduced the concept of tasks, and you use them via types in the System.Threading.Tasks
+   namespace.   
+   
+   The Task class helps with all of these problems. Compared to a thread, a Task is
+   higher-level abstraction—it represents a concurrent operation that may or may not
+   be backed by a thread. Tasks are compositional (you can chain them together
+   through the use of continuations). They can use the thread pool to lessen startup
+   latency, and with a TaskCompletionSource , they can leverage a callback approach
+   that avoids threads altogether while waiting on I/O-bound operations.   
+
+   Tasks use pooled threads by default, which are background
+   threads. This means that when the main thread ends, so do
+   any tasks that you create. Hence, to run these examples from a
+   Console application, you must block the main thread after
+   starting the task (for instance, by Wait ing the task or by call‐
+   ing Console.ReadLine ):
+   #+BEGIN_SRC CSHARP
+   Task.run(()=> console.writeline("foo"));
+   Task<int> s = new task<int>(method(500));
+   #+END_SRC
+the second line means that we are starting a task and task is simply a pointer to a thread or a thread in a thread pool as we said before
+so we are now starting a task that expects the method that is run to return an int type so we can use return types unlike in threads that are very limited
+
+*** waiting for tasks
+    In addition to waiting for a single task, the Task class also offers two static methods that allow a
+    thread to wait on an array of Task objects. Task ’s static WaitAny method blocks the calling thread
+    until any of the Task objects in the array have completed. This method returns an Int32 index into
+    the array indicating which Task object completed, causing the thread to wake and continue run-
+    ning. The method returns -1 if the timeout occurs and throws an OperationCanceledException if
+    WaitAny is canceled via a CancellationToken .
+    Similarly, the Task class has a static WaitAll method that blocks the calling thread until all the
+    Task objects in the array have completed. The WaitAll method returns true if all the Task objects
+    complete and false if a timeout occurs; an OperationCanceledException is thrown if WaitAll is
+    canceled via a CancellationToken .
+** Async and Await
+   So you can call an async method separately by obtaining a task object to it, then do some unrelated work, and after that await that task,
+   either it has already finished which will result in returning the value from the task and then using it in next statements, 
+   or if it has not finished yet, then the execution will go back to the caller of the async method, and the program will execute 
+   normally without blocking the UI or the running service, and then once the task is done, it will proceed with the rest of the async method and return.
+* The best explanation and summary of anonymousmethods and Lambda expressions and Expression<>
+https://stackoverflow.com/questions/17709006/anonymous-methods-vs-lambda-expression
+https://stackoverflow.com/questions/793571/why-would-you-use-expressionfunct-rather-than-funct check the second answer 
+http://fascinatedwithsoftware.com/blog/post/2012/01/10/More-on-Expression-vs-Func-with-Entity-Framework.aspx
+** LIMITATIONS OF CONVERSIONS TO EXPRESSION TREES
+   The most important restriction is that only expression-bodied lambda expressions can
+   be converted to expression trees. Although our earlier lambda expression of
+   (x, y) => x + y was fine, the following code would cause a compilation error:
+   Expression<Func<int, int, int>> adder = (x, y) => { return x + y; };
+   The expression tree API has expanded since .NET 3.5 to include blocks and other
+   constructs, but the C# compiler still has this restriction, and it’s consistent with the use
+   of expression trees for LINQ. This is one reason that object and collection initializers
+   are so important: they allow initialization to be captured in a single expression, which
+   means it can be used in an expression tree.
+   Additionally, the lambda expression can’t use the assignment operator, or use C#
+   4’s dynamic typing, or use C# 5’s asynchrony. (Although object and collection initializ-
+   ers do use the = symbol, that’s not the assignment operator in that context.)
+* EF core
+** Notes To remember 
+   always check the compatibility between the EFtools and the .netcore sdk they must be exactly the same in order for ef to work 
+   then you install the EF database provider and thats it 
+** how to start with vscode and mysql 
+*** from nuget install mysql.EFcore //use pomelo instead because it supports migrations
+    the connection string is simple :
+    optionsBuilder.UseMySql("Server=localhost;Database=ef;User=root;Password=sdeath");   
+*** from nuget install efcore.tools 
+    these are the tools that you will be using to communicate with EF like "dotnet ef" 
+** Connection string
+   it should be like this for sql server : 
+   optionsBuilder.UseSqlServer(@"Server=ezio-salih;Database=SchoolDB;Trusted_Connection=false;User=SA;Password=125874569Sql");
+   server:server-name
+   trusted_connection should be false by default
+   must provide username and password
+** [[https://www.entityframeworktutorial.net/efcore/entity-framework-core.aspx][Entity core ]]
+** Context class
+   The context class is a most important class while working with EF 6 or EF Core. 
+   It represent a session with the underlying database using which you can perform CRUD (Create, Read, Update, Delete) operations.
+** Creating the model
+   Creating the Model
+   Entity Framework needs to have a model (Entity Data Model) to communicate with the underlying database. 
+   It builds a model based on the shape of your domain classes, the Data Annotations and Fluent API configurations.
+   The EF model includes three parts: conceptual model, storage model, and mapping between the conceptual and storage models. 
+   In the code-first approach, EF builds the conceptual model based on your domain classes (entity classes), the context class and configurations. EF Core builds the storage model and mappings based on the provider you use. 
+   For example, the storage model will be different for the SQL Server compared with DB2.
+
+   EF uses this model for CRUD (Create, Read, Update, Delete) operations to the underlying database.
+* Akka.net
+** RemoteActorRefProvider
+an actor factory that makes your actor remote capable (whether it is a cluster of simply remote)
+** if you want to pass Lists and bytes and all sorts of things mae sure to define hyperion serializer
+* Enumeration,Enuumerators and Iterators
+  enumeration is simply going and iterating through a list like foreach loop thats enumeraton its simple 
+  to create an enumerator you had to do the following steps 
+  1. Implement the Ienumerable interface
+  2. write a private class thatimplements the Ienumerator
+  3. code your GetEnumerator method to call your private class 
+
+ , well its complex thats why they
+  created Iterators
+** Iterators 
+   iterators are simple easy and awesome and here is a link 
+   https://www.infoworld.com/article/3122592/my-two-cents-on-the-yield-keyword-in-c.html
+   iterators are methods that returns and Ienumerable object 
+   (thats because you want o use foreach statement on this object and Ienuerable interface has the methods
+   that forech keyword needs "movenext" and "current" so thats why your iterator method should return an Ienumerable
+   when you call a foreach statment on your object ,your iterator method will get executed until it reaches the yield return statement 
+   which returns the current Element and saves the state so that the next iteration in forloop will continue from there
+   in other words it returns to the caller but memorizes the state 
+   and the big bennefit is that you dont have to use a create a list and instead of yield you use add method then return the list
+   in iterators you benefit with lazy execution 
+
+   
+   your method can return eitehr Ienumerable or Ienumerable<T> 
+   the first ,when the yield statment is reached it return an object 
+   the second return T(type) lie int or string   
+** difference between Ienumrabe and Ienumerator
+   An IEnumerator is a thing that can enumerate: it has the Current property and the MoveNext and Reset methods
+   (which in . NET code you probably won't call explicitly, though you could). An IEnumerable is a thing that can be enumerated...
+   which simply means that it has a GetEnumerator method that returns an IEnumerator    
+* Inversion of control ,dependency injection , dependency injection principle
+https://www.tutorialsteacher.com/ioc/introduction
+* Networking, Streams and serialization
+** old
+  TextReader and txet Writer are abstarct classes so you cant instantiat form them 
+  remember to always flush otherwise it wont write anything
+  
+  there are two ways to use serilization either using xml or binary and soap both work the same way and the same steps
+  you need a stream whether its a streamwriter or filestream all that matters is a stream then 
+  u need you serializer object 
+  then you need to seriliaze in case of xml serialization you need to pass the type of the object that you want to serialize into the serilizer like this 
+  xmlsserializer serilize=new xmlserlializer(typeof(class))
+  now you call the method serialize 
+  
+  the deserialization process is the same you need createand object of the wanted deserializable object then
+  like this
+  sample s =(sample)serializer.deserialize(stream);
+** New
+   So with our fat, chunky JSON requests being broken up into tiny, sub-kilobyte packets, 
+   and sent over as an array of seemingly random, disjointed pieces of data, how can we possibly expect our recipients 
+   to process this data? Well, in C#, that's where the concept of a data stream comes in. Within the context of our application code, we can reliably
+   assume that the transport layer will recompose our packets  into a sequence of bits for us to consume as
+   soon as it becomes available to us. So once we get that sequence of bits back, how do we consume it? As an IO stream!
+*** Stream
+    The objective of the Stream class is, quite simply, to provide direct access to an ordered sequence of bytes. There is no additional
+    context around this information, so the sequence of bytes could be anything from a file on your local disk storage, to the bytes of
+    a packet from an incoming request stream, or to an open communication pipe between two co-located application processes and existing
+    entirely in memory.
+--------------------------------
+To the extent that you can, it's usually wise to use as generic a type as possible when declaring your variables. This allows you a 
+lot more flexibility if you need to change your implementation strategy down the line. What might be a locally stored filesystem
+access today could become a remote API call tomorrow. If your code is only concerned with the generic concept of a Stream class, it's
+a lot easier to change it later for different sources later.
+--------------------------------
+
+ a Stream is an active connection to a data source. That
+means it needs to be opened before it can be used, and it should be closed, and then disposed of before you're done with it. 
+Failing to do so can result in memory leaks, thread starvation, and other performance or reliability issues with your code.
+Thankfully, .NET Core provides a built-in pattern for each of these life cycle tasks. The constructors for most Stream classes
+will return an already-opened instance of the class you're creating, so you can start reading from and writing to your streams
+right away. As for guaranteeing the disposal of your streams, we have the eternally useful using statement.
+
+
+we couldn't write our string directly to the stream. It's not the job of a stream of bytes to figure out how more
+complicated objects should be represented as bytes. It's just the road over which they travel. So, we're responsible 
+for first getting the byte representation of the string that we want to send. For this, we use the System.Text.Encoding 
+class to get the byte representation for the specific string encoding that we want to use.
+but there is a workaround to read and write directly using strings , and thats by using streamreader and streamwriter subclassses
+
+
+Enter the ever-versatile StreamReader and StreamWriter classes. Each of these classes is explicitly designed to read/write strings
+specifically. In fact, they both sub-class the TextReader class from the System.IO namespace, and extend its functionality to interface 
+directly with byte streams. They are tailor-made to work with strings, and each of them, combined with the simplicity of Newtonsoft.Json, 
+can make short work of transporting even the most complex data structures over the wire.
+**** newtonsoft.json 
+its a cool serializer thta lets you serialize anything you want into json then it return any object a string (a json string)
+*** Sockets
+    a software interface for a specific port , A socket, being a resource, is also
+    represented by a descriptor. Therefore, for sockets, a descriptor's life
+    can be divided into three phases: open/create socket, receive and
+    send to socket, and ultimately closing the socket.
+    a socket can viewed as a handle to a netowrking ressource just like in files ,and we use that andle to create streams to write and read from that resource 
+    
+    There are basically two main types of sockets
+1. stream socket (uses conection oriented protocol tcp and guarntees the order of transmission and error correction of packets)
+2. datagram sockets (uses conectionless protocol udp and doesnt guarantee shit)  
+
+3. raw sockets (A raw socket, by definition, is a socket that takes packets, bypasses
+the TCP and UDP layers in the TCP/IP stack and sends them directly
+to the application. we use this only when we need to write low level software program and requires substaintial knoweldge of tcp/udp/ip
+
+The exact protocol definition between the two communicating entities needs to be made
+clear beforehand, so that there will be no deadlocks between the
+client and server applications caused by not knowing who will send
+the data first.
+**** the difference between socket.listen() and socket.accept();
+     The listen() function basically sets a flag in the internal socket structure marking the socket as a
+     passive listening socket, one that you can call accept on. ... 
+     The accept() function asks a listening socket to accept the next 
+     incoming connection and return a socket descriptor for that connection
+     
+**** IpEndpoint
+     IPEndPoint is a specific implementation of the EndPoint abstract class required by the
+     Socket.ConnectAsync() method we'll be using. It defines the specific location of the remote 
+     resource we intend to connect to, and exposes metadata about that endpoint. It also provides the AddressFamily 
+     value for our Socket constructor signature
+*** WebRequest
+
+    Often, you'll find that WebRequest and WebResponse instances are instantiated and leveraged over and over
+    again for the same kinds of messages, and their payloads should be serialized in the same way each and every
+    time. Being able to provide SerializationInfo as a constructor input gives you the flexibility to define your
+    serialization rules and details once, and then leverage them for a theoretically infinite number of requests.
+    and that why the webrequest class has two constructors 
+    the first constructor is empty and the second is of the form "public WebRequest(SerializationInfo si, StreamingContext sc)" 
+    you provide the serialization rules and the details of the message once in a form of serializationinfo object and you use the object for 
+    multiple webrequests and webresponses objects
+    
+    -----------------------note------------------    
+    Here, it's important to note that the WebRequest class is primarily a tool for creating lower-level, protocol agnostic
+    request/response transactions with other resources on your network. The .NET Standard provided sub-classes that, while
+    not explicitly deprecated, have been made mostly obsolete by slightly more robust client classes, such as the HttpClient or WebClient classes.
+    As a matter of fact, Microsoft recently released a recommendation for always using the newer client classes over any of the slightly older sub-classes 
+---------------------------------------------
+**** Groupname
+     your request will take advantage of any established connections to that same external resource. If there are
+     no other requests associated with the specified ConnectionGroupName property, then .NET Core will create a
+     connection in its connection pool, and associate your request as the first in the connection group. This is
+     especially useful if a set of requests are targeting a resource that requires access credentials, as the connection
+     is established with those access credentials once, and then shared with the subsequent requests!
+**** the class methods
+     The methods in this class can be broken up into two conceptual groups. There are methods for state management and methods for request execution. 
+     The state management methods allow you to modify or further define the state of your instance of the WebRequest utility class. Leveraging them
+     to further configure and define the behavior of your instance is similar to setting any of the public properties on the class as we did in the 
+     last section on Class properties. The reason there are methods to do this, instead of simply having more settable properties, is because doing
+     so involves at least some non-trivial logic or circumstance-specific details that are applied with each invocation of the methods. Meanwhile,
+     the request execution functions allow you to define, invoke, and resolve web requests using the behavior of your instance. They're the workhorse
+     methods that make all of the earlier configuration worthwhile. So, let's take a look at each of these sets of methods in turn and fully crystalize 
+     our understanding of this class.
+***** state man nnagment methods 
+      the webrequest.create() method returns an instance of an approprite sub-class of the abstract webrequest class , so its called a facotry method
+      so if you pass a uri that looks like this "http://www.google.com" the create method will know that its should return an instance of the httpwbrequest subclass 
+
+      So, any URI string given to the Create method with any of these four prefixes as the first characters in the string 
+      will be reliably handled by the WebRequest base class. And since the base class provides a sufficient interface 
+      for executing the core operations of its sub-classes, you don't even have to know specifically what sub-class was returned. 
+      Thanks to type inheritance, you can just declare your instance as being of type WebRequest, and use it accordingly, just like
+      I did in the sample method from earlier.
+***** Execution methods 
+      With a WebRequest instance, the RequestStream is .NET's representation of the open connection. Think of it as the wire over which you
+      can transmit your signal. Anytime you want to pass data through a WebRequest instance, you'll first need to access that wire. Once you
+      have it, you can start passing data through that stream, and trust that the WebRequest class is going to broker its transmission
+      accordingly.Bear in mind that writing to a stream typically requires the raw byte array for a given object (this is where serialization 
+      comes into play), so once we have our stream, writing to it isn't as simple as passing our objects or messages directly over the wire,
+      although it's not prohibitively complicated either. In practice, however you choose to access the request stream for an active instance 
+      of WebRequest, writing to it will typically look similar to the following code block:
+
+      The GetResponse() method
+      returns a WebResponse object and connects to the server to return
+      some data. To read the data that is returned from the server we use a
+      StreamReader to read line-by-line.
+      
+**** subclasses
+*** http status codes
+    1XX: Informational status code. This indicates that the request was in fact received, and the processing of that request is continuing.
+    2XX: Success status code. This indicates that the request was successfully received and responded to.
+    3XX: Redirection. This indicates that the requesting host must send their request to a new location for it to be successfully processed.
+    4XX: Client Error. An error that is produced by the actions of the client, such as sending a malformed request or attempting to access 
+    resources from the wrong location.
+    5XX: Server Error. There was a fault on the server preventing it from being able to fulfill a request.
+    The client submitted the request correctly, but the server failed to satisfy it.
+* General informations about the CLR
+  first you have the language that gets compiled into managed module that gets excuted by the CLR1 
+  
+  In fact, at runtime, the CLR has no idea which programming language the developer used for the
+  source code. This means that you should choose whatever programming language allows you to
+  express your intentions most easily. You can develop your code in any programming language you
+  desire as long as the compiler you use to compile your code targets the CLR.
+** PE 
+windows portable that can run on either 32bit or 64 bit machines ,
+PE can be of three types 
+a cui (conole application )
+gui (graphical user interface appplcation 
+windows store app
+** assemblies
+   an assembly is a logical grouping of one or more
+   modules or resource files. Second, an assembly is the smallest unit of reuse, security, and versioning.
+   Depending on the choices you make with your compilers or tools, you can produce a single-file or a
+   multifile assembly. In the CLR world, an assembly is what we would call a component.
+** power of CLR
+   Important I think this ability to switch programming languages easily with rich integra-
+   tion between languages is an awesome feature of the CLR. Unfortunately, I also believe
+   that developers will often overlook this feature. Programming languages such as C# and
+   Visual Basic are excellent languages for performing I/O operations. APL is a great language
+   for performing advanced engineering or financial calculations. Through the CLR, you can
+   write the I/O portions of your application in C# and then write the engineering calculations
+   part in APL. The CLR offers a level of integration between these languages that is unprec-
+   edented and really makes mixed-language programming worthy of consideration for many
+   development projects.
+** managed module is composed of (il and metadata)
+   A managed module is a standard 32-bit Windows portable
+   executable (PE32) file or a standard 64-bit Windows portable executable (PE32+) file that requires the
+   CLR to execute.
+   If the header uses the PE32 format, the file can run on a 32-bit or 64-bit
+   version of Windows. If the header uses the PE32+ format, the file requires a 64-bit ver-
+   sion of Windows to run. This header also indicates the type of file: GUI, CUI, or DLL, and
+   contains a time stamp indicating when the file was built. For modules that contain only IL
+   code, the bulk of the information in the PE32(+) header is ignored. For modules that con-
+   tain native CPU code, this header contains information about the native CPU code.
+   
+   metadata has multiple uses for example
+
+   Metadata allows the garbage collector to track the lifetime of objects. For any object, the
+   garbage collector can determine the type of the object and, from the metadata, know which
+   fields within that object refer to other objects.
+
+** power of Microsoft c++
+   Of all of the Microsoft compilers , C++ is unique in that it is the only compiler that
+   allows the developer to write both managed and unmanaged code and have it emitted into a single
+   module. It is also the only Microsoft compiler that allows developers to define both managed and
+   unmanaged data types in their source code. The flexibility provided by Microsoft’s C++ compiler is
+   unparalleled by other compilers because it allows developers to use their existing native C/C++ code
+   from managed code and to start integrating the use of managed types as they see fit.
+** IL code can sometimes be called as managed code
+** il is a CPU-independent machine language
+   IL can be written in assembly language, and Microsoft does provide an IL Assembler, ILAsm.exe. Microsoft also
+   provides an IL Disassembler, ILDasm.exe.
+   ny high-level language will most likely expose only a subset of the facilities
+   offered by the CLR. However, the IL assembly language allows a developer to access all of the CLR’s
+   facilities.ou can choose to write that portion of your code in IL assembly or
+   perhaps another programming language that exposes the CLR feature you seek.
+** Jit compiler
+   When Main makes its first call to WriteLine , the JITCompiler function is called. The JIT­
+Compiler function is responsible for compiling a method’s IL code into native CPU instructions.
+Because the IL is being compiled “just in time,” this component of the CLR is frequently referred
+to as a JITter or a JIT compiler.
+** perfermance tip
+   In addition, you may want to consider using the System.Runtime.ProfileOptimization class.
+   This class causes the CLR to record (to a file) what methods get JIT compiled while your application
+   is running. Then, on a future startup of your application, the JIT compiler will concurrently compile
+   these methods by using other threads if your application is running on a machine with multiple CPUs.
+   The end result is that your application runs faster because multiple methods get compiled concur-
+   rently, and during application initialization instead of compiling the methods just in time as the user is
+   interacting with your application.
+** unsafe code
+** Rules of the common language specification CLS
+    In the CLR, every member of a type is either
+   a field (data) or a method (behavior). This means that every programming language must be able to
+   access fields and call methods. Certain fields and certain methods are used in special and common
+   ways. To ease programming, languages typically offer additional abstractions to make coding these
+   common programming patterns easier. For example, languages expose concepts such as enums,
+   arrays, properties, indexers, delegates, events, constructors, finalizers, operator overloads, conver-
+   sion operators, and so on. When a compiler comes across any of these things in your source code, it
+   must translate these constructs into fields and methods so that the CLR and any other programming
+   language can access the construct.  
+
+   If you intend to create types that are easily accessible from other programming languages, you
+   need to use only features of your programming language that are guaranteed to be available in all
+   other languages. To help you with this, Microsoft has defined a Common Language Specification
+   (CLS) that details for compiler vendors the minimum set of features their compilers must support if
+   these compilers are to generate types compatible with other components written by other CLS-compliant languages on top of the CLR.
+   
+   The CLR/CTS( common type system ) supports a lot more features than the subset defined by the CLS, so if you don’t
+   care about interlanguage operability, you can develop very rich types limited only by the language’s
+   feature set. Specifically, the CLS defines rules that externally visible types and methods must adhere to
+   if they are to be accessible from any CLS-compliant programming language. Note that the CLS rules
+   don’t apply to code that is accessible only within the defining assembly. Figure 1-6 summarizes the
+   ideas expressed in this paragraph
+
+   To test if your assembly is clscompliant add the following line before the namespace 
+   [assembly:CLSCompliant(true)] 
+   this way the compiler will throw you warnings whether you assembly is cls compliant or not 
+** difference between managed and unmanaged code
+   The difference between Unmanaged code and Managed code is that: Unmanaged code: means that compile directly to machine code, and directly executed by OS. ...
+   Managed code: means that compile to Intermediate Language - IL
+   and execute under the management of Common Language Runtime - CLR.
+* mssql
+** verify the current status of mssql-server
+   systemctl status mssql-server
+** stop msqsq-server
+   sudo systemctl stop mssql-server
+** start msqsql-server
+   sudo systemctl enable mssql-server
+** Connect locally
+   sqlcmd -S localhost -U SA -P '<YourPassword>'
+** show server instance name 
+   select @@SERVERNAME
+** enable mssql-server at startup 
+   systemctl enable mssql
+** disable mssql-server at startup
+   systemctl disable mssql
+* VSCode shortcuts
+ctrl + j hide the terminal pannel
+ctrl + b hide and show the file explorer panel
+ctrl + shift + p for executing commands
+
+* Awesome.wm
+just remove free desktop to make startup time faster
