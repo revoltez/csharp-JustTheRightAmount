@@ -281,7 +281,9 @@ it just means TYpe result just like T in types
     
 *** Events
     they providde encapsulation to the delegates , they are basically getters and setters of a delegate , 
-    you cant do the (=) operation on an event , only the += and -= 
+    you cant do the (=) operation on an event , only the += and -= (this means that events have inherent security over
+    delegates, using public delegate variables gives the possibility to other classes to invoke or override our delegate and do all 
+    sorts of stuff with it, using events, other classes can only subscribe and unsubscribe)
 * Method GRoups
 the methods that have the same name but difers in the signature are called methods groups like console.writeline
 * Type system characteristics
