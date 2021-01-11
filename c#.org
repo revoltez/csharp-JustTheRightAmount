@@ -174,6 +174,10 @@ That’s where interfaces come in handy. You
    code in that interface, so that certain methods don’t have to be implemented
    in each inheriting class. What you want is an abstract class. You get the
    features of an interface, but you can write code in it like a normal class.
+** nested classes
+   Why use them : The purpose is typically just to restrict the scope of the nested class. 
+   Nested classes compared to normal classes have the additional possibility of the private modifier (as well as protected of course).
+   Basically, if you only need to use this class from within the "parent" class (in terms of scope), then it is usually appropiate to define it as a nested class. 
    
 * Collections
 ** lists
@@ -281,7 +285,9 @@ it just means TYpe result just like T in types
     
 *** Events
     they providde encapsulation to the delegates , they are basically getters and setters of a delegate , 
-    you cant do the (=) operation on an event , only the += and -= 
+    you cant do the (=) operation on an event , only the += and -= (this means that events have inherent security over
+    delegates, using public delegate variables gives the possibility to other classes to invoke or override our delegate and do all 
+    sorts of stuff with it, using events, other classes can only subscribe and unsubscribe)
 * Method GRoups
 the methods that have the same name but difers in the signature are called methods groups like console.writeline
 * Type system characteristics
