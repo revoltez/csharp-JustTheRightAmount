@@ -591,6 +591,30 @@ http://fascinatedwithsoftware.com/blog/post/2012/01/10/More-on-Expression-vs-Fun
    Additionally, the lambda expression can’t use the assignment operator, or use C#
    4’s dynamic typing, or use C# 5’s asynchrony. (Although object and collection initializ-
    ers do use the = symbol, that’s not the assignment operator in that context.)
+* cool things to do with delegates
+say for example i created a library and i have a Function but i need some informations from the consumer of my library
+but i dont need an object from them, lets say i need their code , i need the user of my function to give me his code and i'll use his code inside
+my function , how do you do that ?
+Answer : i will write a function that takes a delegate as a parameter , meaning i will take a pointer to a function, this time we can
+pass a whole function to another function inside the parameter
+example from :
+public delegate int addone(int s);
+public int Addone(addone ADD)
+{
+   int A = 6;
+   int s = Add(A)
+   return s+1;
+}
+i'll make this as a package (nuget package) everyone would download this and they see that they need to pass in a delegate
+they could somthing like this
+RUN((s)=>
+{
+    s+1;
+});
+all the user function is supplied in the parameter of RUN method in the form of a
+lambda expression which are fancier ways of writing anonymous methods , here the
+user is simply calling my function like a normal function, and now the ADD delegate is pointing to my function so when the RUN method gets executed
+the first line simply calls the user function and do whatever with it, here we are simply adding 1 to whatever result we get from the user function.
 * EF core
 ** Notes To remember 
    always check the compatibility between the EFtools and the .netcore sdk they must be exactly the same in order for ef to work 
